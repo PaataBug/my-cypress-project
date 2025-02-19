@@ -49,3 +49,39 @@ my-cypress-project/
 2. **Run Tests Headlessly (Optional):**
     ```bash
     npx cypress run
+
+
+# Cypress Test Automation – Login Test
+
+## 📌 Explanation of the Test Flow
+
+### 🏗 Page Object Model (POM)
+The login actions are encapsulated in `cypress/pages/loginPage.js`.  
+This page object includes methods for:
+
+- **Navigating to the home page (`visit()`)** – Uses `cy.visit("/")` to go to the base URL.
+- **Clicking the "Login" link (`clickLoginLink()`)** – Finds the "Login" button using `cy.contains("Login")` and clicks it.
+- **Entering username and password (`enterUsername(username)` and `enterPassword(password)`)**  
+  - Locates the username input field (`name="login"`) and types the username.  
+  - Locates the password input field (`name="password"`) and types the password.  
+- **Clicking the "Login" button (`clickLoginButton()`)** – Finds the submit button using `button[type="submit"]` and clicks it.
+- **Verifying successful login (`isLoggedIn()`)** – Checks if the "Logout" element is visible, indicating a successful login.
+
+---
+
+### 🔍 Test Script in `cypress/e2e/buggy-project.cy.js`
+The test script creates an instance of the `LoginPage` class and performs the following steps:
+
+1️⃣ **Visit the homepage** using `loginPage.visit()`.  
+2️⃣ **Click the "Login" link** to navigate to the login page.  
+3️⃣ **Enter valid credentials** retrieved from environment variables:  
+   - Username from `Cypress.env("username")`  
+   - Password from `Cypress.env("password")`  
+4️⃣ **Click the "Login" button** to submit the form.  
+5️⃣ **Verify successful login** by checking if the "Logout" button is visible.
+
+---
+
+## ✅ Summary
+This test follows the **Page Object Model (POM)** approach, making it **modular** and **reusable**.  
+The **login functionality** is abstracted into `LoginPage.js`, and the test script in `buggy-project.cy.js` simply calls the required methods.  
